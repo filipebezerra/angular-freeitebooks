@@ -1,5 +1,7 @@
 'use strict';
 
+/* App Module */
+
 var freeEbooksApp = angular.module('freeEbooksApp', [
 		'freeEbooksControllers'
 	]);

@@ -1,3 +1,5 @@
+/* Credits by: https://gist.github.com/rpflorence/701407/download# */
+
 var http = require("http"),
     url = require("url"),
     path = require("path"),
