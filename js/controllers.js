@@ -2,7 +2,7 @@
 
 /* Controllers */
 
-var freeEbooksControllers = angular.module('freeEbooksControllers', []);
+var freeEbooksControllers = angular.module('freeEbooksControllers', ['freeEbooksServices']);
 
 freeEbooksControllers.controller('NavLinksController', function(){
 	this.navSelected = 1;
@@ -14,8 +14,10 @@ freeEbooksControllers.controller('NavLinksController', function(){
 	this.isSelectedNav = function(navLink) {
 		return this.navSelected === navLink;
 	};
+});
 
-	this.showToDo = function() {
-		
-	};
+freeEbooksControllers.controller('BookQueryController', function($scope, EbookQuery){
+	EbookQuery.get(function(data){
+
+	});
 });
