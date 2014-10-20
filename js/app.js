@@ -1,3 +1,6 @@
 /* App */
 
-angular.module('freeItEbooksApp', ['freeItEbooksControllers']);
+angular.module('freeItEbooksApp', [
+        'freeItEbooksControllers'
+    ]
+);
