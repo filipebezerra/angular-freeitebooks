@@ -53,9 +53,16 @@ angular.module('freeItEbooksControllers', [
                     console.log('Search query: ' + queryText);
 
                     var books = EbookSearchFactory.query({query : queryText}, function() {
-                        console.log('Books found: ' + books.Books.length);
+                        if (books.Books == null) {
+                            console.log('No books found');
 
-                        $scope.mockEbooks = books.Books;
+                            $scope.mockEbooks = null;
+                        } else {
+                            console.log('Books found: ' + books.Books.length);
+
+                            $scope.mockEbooks = books.Books;
+                        }
+
                         $scope.search = '';
                     });
                 };
