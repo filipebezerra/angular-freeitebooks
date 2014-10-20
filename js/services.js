@@ -1,13 +1,18 @@
-'use strict';
-
 /* Services */
 
-var freeEbooksServices = angular.module('freeEbooksServices', ['ngResource']);
+angular.module('freeItEbooksServices', ['ngResource'])
 
-freeEbooksServices.factory('EbookFactory', function($resource) {
-    return $resource("http://it-ebooks-api.info/v1/search/:query", {}, {
-        query : {
-            method : 'GET'
-        }
+    .factory('EbookSearchFactory', function($resource){
+        return $resource(
+            'http://it-ebooks-api.info/v1/search/:query',
+            {},
+            {
+                query :
+                {
+                    isArray : false
+                }
+            }
+        );
     })
-});
+
+;

@@ -1,10 +1,8 @@
-'use strict';
-
 /* Controllers */
 
-var ebookSections = [
+var _navLinks = [
     {
-        name : 'Angular.js',
+        name : 'AngularJS',
         tag : 'angularjs'
     },
     {
@@ -17,7 +15,7 @@ var ebookSections = [
     }
 ];
 
-var androidSearch = {
+var _androidEbooks = {
     "Error": "0",
     "Time": 0.00082,
     "Total": "154",
@@ -106,20 +104,35 @@ var androidSearch = {
     ]
 };
 
-var freeEbooksControllers = angular.module('freeEbooksControllers', [])
 
-    .controller('NavLinksController',
-        function(){
-            this.sections = ebookSections;
-            this.selectedSection = this.sections[0];
-            this.ebooks = androidSearch.Books;
+angular.module('freeItEbooksControllers', ['freeItEbooksServices'])
+    .controller('NavBarLinksController', ['$scope', 'EbookSearchFactory',
+        function($scope, EbookSearchFactory){
+            $scope.navLinks = _navLinks;
 
-            this.isSelectedSection = function(section) {
-                return this.selectedSection === section;
+            $scope.selectedNavLink = $scope.navLinks[0];
+
+            $scope.mockEbooks = _androidEbooks.Books;
+
+            $scope.isSelectedNavLink = function (navLink) {
+                return $scope.selectedNavLink === navLink;
             };
 
-            this.selectSection = function(section) {
-                this.selectedSection = section;
+            $scope.selectNavLink = function (navLink) {
+                $scope.selectedNavLink = navLink;
+                $scope.query($scope.selectedNavLink.tag);
+            };
+
+            $scope.query = function(searchQuery){
+                var books = EbookSearchFactory.query({query : searchQuery}, function() {
+                    console.log(books);
+
+                    $scope.mockEbooks = books.Books;
+
+                    $scope.searchQuery = '';
+                });
             };
         }
-    );;
+    ])
+
+;
